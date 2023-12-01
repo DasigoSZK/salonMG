@@ -1,0 +1,102 @@
+/* ********Variables******** */
+
+:root {
+  /*Colores*/
+  --color-verdeNav: #74af70;
+  --color-violetaBtn: #6f3083;
+  --color-violetaPrecio: #f0c0ff;
+  --color-verdeFondo: #363936;
+  --color-acordeon1: #70af8b;
+  --color-acordeon2: #98c4ab;
+  --color-nosotrasTexto: #769583;
+  /*Texto*/
+  --font-main: "Roboto", "sans-serif";
+  --text-color1: #fff;
+  --text-color2: #333333;
+
+}
+
+
+/* ********Reset******** */
+
+html {
+  box-sizing: border-box;
+  font-family: var(--font-text);
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  color: var(--text-white);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 3.25rem;
+}
+
+h4 {
+  font-size: 3rem;
+}
+
+h5 {
+  font-size: 2.5rem;
+}
+
+h6 {
+  font-size: 2rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--text-color1);
+  text-decoration: none;
+}
+
+
+/* ********Estilos de cada Página******** */
+
+
+
+
+/* ********Media-Queries******** */
