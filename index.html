@@ -14,26 +14,32 @@
 <body>
 
   <!-- NavBar -->
-  <nav class="navbar--color navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar--color navbar  bg-body-tertiary">
 
-    <div class="container-fluid">
+    <div class="d-lg-block container-fluid">
 
-      <a class="navbar-brand" href="index.html"><img class="nav_logo" src="img/nav/nav-salonLogo.png"
-          alt="logo de SalonDeBellezaMG"></a>
+      <div class="d-flex justify-content-between align-items-center w-100">
 
-      <div>
+        <a class="navbar-brand" href="index.html"><img class="nav_logo" src="img/nav/nav-salonLogo.png"
+            alt="logo de SalonDeBellezaMG"></a>
 
-        <a href="error.html"><img src="./img/nav/nav-carrito.svg" class="nav_carrito" alt="carrito de compras"></a>
-        <button class="navbar-toggler fs-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="navbar_buttons">
+
+          <a href="error.html"><img src="./img/nav/nav-carrito.svg" class="nav_carrito" alt="carrito de compras"></a>
+          <button class="navbar-toggler fs-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
 
       </div>
 
+      <hr class="d-none d-lg-block nav_hr">
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav w-100 d-flex flex-lg-row justify-content-evenly">
 
           <li class="nav-item p-2">
             <a class="nav-link active text-light fw-bold text-end" aria-current="page" href="tienda.html">
@@ -71,7 +77,7 @@
   <!-- Pie de Página -->
   <footer class="row">
 
-    <div class="footer_div p-4 col-12 col-md-4">
+    <div class="footer_div p-4 col-12 col-lg-4">
 
       <div class="d-flex flex-column align-items-center">
         <h3 class="div_titulo fw-bold h3 mb-4">CONTÁCTANOS:</h3>
@@ -102,7 +108,7 @@
 
     </div>
 
-    <div class="footer_div p-4 col-12 col-md-4">
+    <div class="footer_div p-4 col-12 col-lg-4">
 
       <div class="d-flex flex-column align-items-center">
         <h3 class="div_titulo fw-bold h3 mb-4">MEDIOS DE PAGO:</h3>
@@ -138,7 +144,7 @@
       </div>
     </div>
 
-    <div class="footer_div p-4 col-12 col-md-4">
+    <div class="footer_div p-4 col-12 col-lg-4">
 
       <div class="d-flex flex-column align-items-center">
         <h3 class="div_titulo fw-bold h3 mb-4">REDES:</h3>
@@ -163,7 +169,7 @@
 
     <hr class="footer_hr">
 
-    <div class="d-flex flex-column align-items-center">
+    <div class="mb-4 d-flex flex-column align-items-center">
       <div class="lh-1 fw-light fst-italic">
         <p>Nombre: Dasigo Szkamarda.</p>
         <p>Institución: Da Vinci.</p>
