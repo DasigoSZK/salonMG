@@ -13,6 +13,8 @@
   --font-main: "Roboto", "sans-serif";
   --text-color1: #fff;
   --text-color2: #333333;
+  /*NavBarIcono*/
+  --var-navbar-icono: url(img/nav/);
 
 }
 
@@ -92,6 +94,72 @@ a {
   color: var(--text-color1);
   text-decoration: none;
 }
+
+/* ********Componentes******** */
+
+/* ---- NavBar ---- */
+
+.nav_logo {
+  width: 52px;
+}
+
+.navbar-toggler {
+  border: 0;
+  /*font-size: 150%;*/
+  padding: 0;
+}
+
+.navbar--color {
+  background-color: var(--color-verdeNav) !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("../img/nav/nav-menuAbierto.svg");
+}
+
+.nav_icon {
+  width: 36px;
+  margin-top: -4%;
+}
+
+.nav_carrito {
+  width: 42px;
+  margin-right: 1rem;
+  margin-top: -7%;
+}
+
+
+
+/* ---- Footer ---- */
+
+footer {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(../img/hero/mobile-background.jpg);
+  background-size: cover;
+  color: var(--text-color1);
+}
+
+.footer_icon {
+  width: 32px;
+}
+
+.footer_redes {
+  width: 64px;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.div_links {
+  max-width: 240px;
+}
+
+.footer_hr {
+  max-width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid white;
+  opacity: 100%;
+}
+
 
 
 /* ********Estilos de cada Página******** */
