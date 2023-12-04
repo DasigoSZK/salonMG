@@ -16,14 +16,25 @@
   <!-- NavBar -->
   <nav class="navbar--color navbar  bg-body-tertiary">
 
-    <div class="d-lg-block container-fluid">
+    <div class="d-lg-block w-100">
 
       <div class="d-flex justify-content-between align-items-center w-100">
 
         <a class="navbar-brand" href="index.html"><img class="nav_logo" src="img/nav/nav-salonLogo.png"
             alt="logo de SalonDeBellezaMG"></a>
 
-        <div class="navbar_buttons">
+        <form class="d-flex w-75" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <svg class="navbar_search text-light" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+              fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+          </button>
+        </form>
+
+        <div class="navbar_buttons justify-self-end min-width-120">
 
           <a href="error.html"><img src="./img/nav/nav-carrito.svg" class="nav_carrito" alt="carrito de compras"></a>
           <button class="navbar-toggler fs-2" type="button" data-bs-toggle="collapse"
@@ -70,6 +81,7 @@
           </li>
 
         </ul>
+
       </div>
     </div>
   </nav>
@@ -115,28 +127,24 @@
         <div class="div_links">
 
           <div class="footer_link">
-            <a href="">
-              <img class="footer_icon" src="./img/footer/footer-efectivo.svg" alt="ícono minimalista de un billete">
-              <span>Efectivo</span></a>
+            <img class="footer_icon" src="./img/footer/footer-efectivo.svg" alt="ícono minimalista de un billete">
+            <span>Efectivo</span>
           </div>
 
           <div class="footer_link">
-            <a href="">
-              <img class="footer_icon" src="./img/footer/footer-tarjeta.svg"
-                alt="ícono minimalista de tarjeta de crédito">
-              <span>Tarjeta de crédito/débito</span></a>
+            <img class="footer_icon" src="./img/footer/footer-tarjeta.svg"
+              alt="ícono minimalista de tarjeta de crédito">
+            <span>Tarjeta de crédito/débito</span>
           </div>
 
           <div class="footer_link col-12">
-            <a href="">
-              <img class="footer_icon" src="./img/footer/footer-billetera.svg" alt="ícono minimalista de billetera">
-              <span>MercadoPago</span></a>
+            <img class="footer_icon" src="./img/footer/footer-billetera.svg" alt="ícono minimalista de billetera">
+            <span>MercadoPago</span>
           </div>
 
           <div class="footer_link">
-            <a href="">
-              <img class="footer_icon" src="./img/footer/footer-banco.svg" alt="ícono minimalista de banco">
-              <span>Transferencia Bancaria</span></a>
+            <img class="footer_icon" src="./img/footer/footer-banco.svg" alt="ícono minimalista de banco">
+            <span>Transferencia Bancaria</span>
           </div>
         </div>
 

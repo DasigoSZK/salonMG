@@ -138,6 +138,19 @@ a {
   margin-bottom: 0.25rem;
 }
 
+.min-width-120 {
+  min-width: 120px;
+}
+
+.navbar_search {
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+
+.navbar form button:hover svg {
+  color: var(--color-verdeNav) !important;
+}
+
 
 
 /* ---- Footer ---- */
