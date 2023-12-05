@@ -217,6 +217,8 @@ footer {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .hero_content {
@@ -234,7 +236,7 @@ footer {
   border: 1px solid white;
   transition: transform 0.3s ease;
   max-width: 340px;
-  width: 100%;
+  width: 45vw;
 }
 
 .logo_img:hover {
