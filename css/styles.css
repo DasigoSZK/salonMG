@@ -8,7 +8,7 @@
   --color-verdeFondo: #363936;
   --color-acordeon1: #70af8b;
   --color-acordeon2: #98c4ab;
-  --color-nosotrasTexto: #769583;
+  --color-nosotrasTexto: #538b6a;
   /*Texto*/
   --font-main: "Roboto", "sans-serif";
   --text-color1: #fff;
@@ -356,6 +356,50 @@ footer {
 
 
 
+/* -------- Sobre Nosotras -------- */
+
+.about {
+  background-color: var(--color-verdeFondo);
+}
+
+.intro_header {
+  max-width: 600px;
+  width: 100%;
+}
+
+.intro_title {
+  border-bottom: 1px solid white;
+}
+
+.intro_sub {
+  color: var(--color-nosotrasTexto);
+}
+
+.intro_p {
+  max-width: 900px;
+}
+
+.w-title {
+  width: 80%;
+  max-width: 300px;
+}
+
+.story_part {
+  max-width: 700px;
+}
+
+.story_img {
+  max-width: 450px;
+  max-height: 450px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.about_logo {
+  max-width: 250px;
+}
+
 
 
 
@@ -403,6 +447,16 @@ footer {
     max-height: 70vh;
     object-fit: cover;
     margin-right: 1rem;
+  }
+
+
+
+  /* -------- Inicio -------- */
+  .story_img {
+    width: 450px;
+    height: 450px;
+    object-fit: cover;
+    object-position: top;
   }
 
 }
