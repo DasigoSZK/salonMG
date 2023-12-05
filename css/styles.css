@@ -311,6 +311,49 @@ footer {
 
 
 
+/* -------- FAQs -------- */
+
+.faqs {
+  background-color: var(--color-verdeFondo);
+}
+
+.faqs_hero {
+  background-image: url("../img/hero/hero-background-desktop.jpg");
+  background-size: cover;
+  padding: 3rem;
+}
+
+.faqs_title {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  max-width: 70%;
+  padding: 1rem;
+}
+
+.accordion_container {
+  background-color: var(--color-verdeFondo);
+  padding: 2rem;
+}
+
+.accordion {
+  max-width: 1200px;
+}
+
+.accordion-item {
+  background-color: var(--color-acordeon2);
+  border-radius: 5px;
+}
+
+.accordion-button {
+  background-color: var(--color-acordeon1) !important;
+}
+
+.accordion-button:focus {
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
 
 
 
