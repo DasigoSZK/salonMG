@@ -221,6 +221,10 @@ footer {
   max-width: 100%;
 }
 
+.hero_logos {
+  max-width: 1200px;
+}
+
 .hero_content {
   max-width: 1200px;
   margin-left: auto;
@@ -233,14 +237,14 @@ footer {
 
 .logo_img {
   border-radius: 50%;
-  border: 1px solid white;
   transition: transform 0.3s ease;
-  max-width: 340px;
+  max-width: 300px;
   width: 45vw;
 }
 
 .logo_img:hover {
   transform: scale(1.05);
+  border: 1px solid white;
 }
 
 .logo_img:active {
@@ -398,6 +402,60 @@ footer {
 
 .about_logo {
   max-width: 250px;
+}
+
+
+
+/* -------- Contact -------- */
+
+.contact {
+  background-color: var(--color-verdeFondo);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.custom--form {
+  max-width: 1000px;
+}
+
+.custom--input {
+  border: 0;
+  border-bottom: 2px solid white;
+  border-radius: 0;
+  background-color: var(--color-verdeFondo);
+  color: whitesmoke;
+}
+
+.custom--input:focus {
+  background-color: var(--color-verdeFondo);
+  box-shadow: none;
+  color: whitesmoke;
+  border-bottom: 2px solid #538b6a;
+}
+
+.custom--btn {
+  color: var(--color-verdeFondo);
+  width: 80%;
+  max-width: 500px;
+}
+
+.custom--btn:hover,
+.custom--btn:active {
+  color: white;
+  background-color: var(--color-verdeFondo);
+  border: 2px solid white;
+}
+
+.custom--textarea {
+  resize: none;
+  height: 200px;
+}
+
+.form_img {
+  width: 300px;
+  margin-left: auto;
 }
 
 
