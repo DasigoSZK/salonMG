@@ -439,6 +439,7 @@ footer {
   color: var(--color-verdeFondo);
   width: 80%;
   max-width: 500px;
+  border: 2px solid white;
 }
 
 .custom--btn:hover,
@@ -456,6 +457,34 @@ footer {
 .form_img {
   width: 300px;
   margin-left: auto;
+}
+
+
+
+/* -------- Error -------- */
+
+.error {
+  background-color: var(--color-verdeFondo);
+  padding: 3rem;
+  height: 80vh;
+}
+
+.error_btn {
+  background-color: white;
+  color: var(--color-verdeFondo);
+  display: block;
+  padding: 0.5rem 3rem 0.5rem 3rem;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 2rem;
+  border: 2px solid white;
+}
+
+.error_btn:hover,
+.error_btn:active {
+  background-color: var(--color-verdeFondo);
+  color: white;
+  border: 2px solid white;
 }
 
 
