@@ -461,6 +461,52 @@ footer {
 
 
 
+/* -------- Tienda -------- */
+
+.shop {
+  background-color: var(--color-verdeFondo);
+  padding: 2rem;
+}
+
+.shop_cards {
+  max-width: 1200px;
+}
+
+.btn-shop {
+  background-color: var(--color-violetaBtn);
+  color: white;
+  border: 2px solid var(--color-violetaBtn);
+  font-weight: bold;
+}
+
+.btn-shop:hover,
+.btn-shop:active {
+  background-color: var(--color-verdeFondo);
+  color: var(--color-violetaBtn);
+  border: 2px solid var(--color-violetaBtn);
+  font-weight: bold;
+}
+
+.card_price {
+  color: var(--color-violetaPrecio) !important;
+}
+
+.card-body {
+  padding: 0.25rem 0 0 0.25rem;
+}
+
+.shop_cards.row {
+  --bs-gutter-x: 1.5rem;
+}
+
+.card {
+  max-width: 300px;
+}
+
+
+
+
+
 /* -------- Error -------- */
 
 .error {
