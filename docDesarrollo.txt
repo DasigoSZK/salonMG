@@ -1,0 +1,83 @@
+Documento de Desarrollo del sitio web "Salón de Belleza M&G":
+
+Datos del Estudiante:
+
+	Nombre: Dasigo Leandro Szkamarda.
+	Comisión: act1av.
+	Materia: Programación Web 1.
+	Carrera: Analista en Sistemas.
+	
+	
+	
+Estructura del Proyecto:
+
+	1_capturas: contiene las capturas reales del sitio divida en 2 carpetas (celular y escritorio).
+				se utilizó la extensión "GoFullPage" para las capturas.
+				
+	2_salonDeBellezaMG: contiene toda la estructura del proyecto (css, imágenes, documentos html, etc).
+	
+	3_wireframe: contiene las imágenes png del planeamiento del sitio hecho en photoshop previo al desarrollo.
+	
+	4_docDesarrolo: membrete con estructura del proyecto, datos del estudiante e historia de desarrollo.
+	
+	
+		
+
+
+1_Descripción del sitio:
+
+
+	 El sitio esta relacionado a la cosmética, principalmente a la manicura, peluquería y sus derivados (cortes, decoloración, nutrición, alisados, 
+	manicuras, pedicuras, micropigmentación, microblanding, entre otros).
+	 Utiliza una paleta de colores de verdes complementarios, y para resaltar los componentes no relacionados a la cosmética sino ligados a otra
+	funcionalidad del sitio se utilizó un color violeta oscuro.
+	 Esta dirigido a una pequeña estética local (dirigida por familiares míos, mi hermana y mi mamá).
+	 La idea es brindar información sobre los servicios, los datos de contacto (WhatsApp, Facebook, Instagram, etc), responder preguntas 
+	frecuentes de los clientes y; en un futuro, brindar funcionalidad al carrito de compras para que la página "tienda" tenga una funcionalidad real.
+	 Sin embargo, esta última por ahora funciona, es una funcionalidad futura, por lo que al entrar al carrito de compras, o al intentar realizar
+	una compra en la tienda, se le redirige a la página de "error.html" con un botón para volver a la pantalla principal.
+
+
+2_Librería usadas:
+
+	Se utilizó Bootstrap para hacer responsive el sitio, y se utilizó un par de los íconos de la librería de íconos de bootstrap.
+	Se utilizó "Animate.css" (https://animate.style/) para las animaciones del hero. Es una librería simple de animaciones css fáciles de usar con cdn
+	y un par de clases. Sin embargo, la librería traía problemas con otras animaciones si utilizaba el link de su cdn, por lo que entré a su hoja de estilos
+	para buscar las clases de las animaciones que me interesaban en lugar de importar todo.
+	(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css) 
+
+	
+	Aunque no es una librería, se utilizó también Git y GitHub, esto obviamente es ajeno a la entrega del proyecto, pero el trabajar
+	con un historial de versiones me permitía no tener miedo a "romper el código", tanto mío como de Bootstrap.
+	Además, como tengo intenciones de hacer funcionar en un futuro el carrito de compras y la tienda, quisiera poder volver atras si es necesario.
+
+3_Entorno de pruebas utilizados:
+
+	Se probó en:
+			Chrome: versión  119.0.6045.199.
+			Firefox: versión 116.0.1.
+			Safari: versión 17.1.
+	Para testear la página, se utilizó siempre la extensión "live server" de VSCode.
+	Al abrir un servidor local, podía entrar desde el celular a la dirección local "192.168.0.117:5500" y ver cómo se veía el sitio directamente
+	en celulares (utilizando Chrome en Android, y Safari en IOS), ya que utilizar el método "responsive" de el inspector de los navegadores
+	de escritorio no siempre da los mismos resultados.
+	Al mismo tiempo, testeaba desde la computadora en Chrome y Firefox.
+
+
+4_Tiempo dedicado al proyecto:
+
+	Lamentablemente no pude utilizar el WIREFRAME que veníamos haciendo en "Comunicación Visual" ya que había maquetado mi portfolio, 
+	el cual no quería hacerlo con Bootstrap y además ya lo había iniciado incluyendo un par de cosas de javascript.
+	Por lo que tuve que empezar de 0, hacer un nuevo wireframe en Photoshop, esto me llevó 2 días, un día inicié con la paleta de colores,
+	y el diseño celular.
+	Luego, en el otro día terminé de maquetarlo para escritorio.
+	Una vez con los wireframe hechos, empecé a maquetar el sitio, primero hice la barra de navegación y el footer ya que sería casi idéntico
+	en todas las páginas.
+	Seguido de esto empecé a maquetar página por página, esto duró 4 días más.
+	Lo que mas tiempo me quitó, fue averiguar sobre cosmética, ya que lamentablemente, no entiendo de eso, por lo que tuve que preguntar 
+	a la manicurista y a la peluquera varias cosas sobre su rubro.
+	Junto con el tiempo "investigando", también ocupé bastante tiempo investigando la hoja de estilos de Bootstrap para poder modificarlo a mi manera,
+	ya que, aunque Bootstrap parece ser genial para hacer un sitio responsive rápido y genérico, el editar estilos puede ser complicado con tantas 
+	clases, y además de que suelen utilizar mucho la palabra clave "!important" en sus estilos, lo que rompe la especificidad de CSS,
+	y lo vuelve bastante complejo en casos en los que nos interesa hacer sitios mas "personalizados"; en lugar de utilizar 
+	muchos estilos predefinidos de Bootstrap.
