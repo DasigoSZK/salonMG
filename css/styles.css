@@ -9,10 +9,17 @@
   --color-acordeon1: #70af8b;
   --color-acordeon2: #98c4ab;
   --color-nosotrasTexto: #538b6a;
+  --color-azulbootstrap: #007bff;
+  --color-verdebootstrap: #28a745;
+  --color-fondoDivs: #e4e4e4;
+  --color-naranjaBootstrap: #fd7e14;
+  --color-rojoBootstrap: #dc3545;
   /*Texto*/
   --font-main: "Roboto", "sans-serif";
   --text-color1: #fff;
   --text-color2: #333333;
+  --text-darkText: #282828;
+  --text-lightBlackText: #363936;
 
 }
 
