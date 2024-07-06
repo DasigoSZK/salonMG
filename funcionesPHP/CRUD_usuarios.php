@@ -12,8 +12,22 @@ function insertarUsuario($nombre, $apellido, $telefono, $correo, $contrasena, $f
 
     if($conexion == null){
 
-      throw new Exception("Error en la conexión: " . mysqli_connect_errno());
+      throw new Exception("Error en la conexión");
     }
+
+    // Limpiamos los datos
+    if(!limpiarDatos($conexion, $nombre, $apellido, $telefono, $correo, $contrasena, $fk_tipo_usuario)){
+
+      throw new Exception("No se pudo limpiar los datos, posible error en la conexión.");
+    }
+
+    if(!filter_var($correo, FILTER_VALIDATE_EMAIL)){
+
+      throw new Exception("El correo ingresado no posee un formato válido.");
+    }
+
+    //Encriptamos la contraseña
+    $contra = password_hash($contra, PASSWORD_DEFAULT);
 
     $consulta = "INSERT INTO usuarios VALUES 
                 (0, '$nombre', '$apellido', '$telefono', '$correo', '$contrasena', '$fk_tipo_usuario')";
@@ -85,6 +99,8 @@ function eliminarUsuario($usuario_id){
 function modificarUsuario($id_usuario, $nombre, $apellido, $telefono, $correo, $contrasena, $fk_tipo_usuario){
 
   try {
+
+    require_once 'funciones_login.php';
     
     $conexion = conectar();
 
@@ -92,6 +108,20 @@ function modificarUsuario($id_usuario, $nombre, $apellido, $telefono, $correo, $
 
       throw new Exception("Error en la conexión: " . mysqli_connect_errno());
     }
+
+    // Limpiamos los datos
+    if(!limpiarDatos($conexion, $id_usuario, $nombre, $apellido, $telefono, $correo, $contrasena, $fk_tipo_usuario)){
+
+      throw new Exception("No se pudo limpiar los datos, posible error en la conexión.");
+    }
+
+    if(!filter_var($correo, FILTER_VALIDATE_EMAIL)){
+
+      throw new Exception("El correo ingresado no posee un formato válido.");
+    }
+
+    //Encriptamos la contraseña
+    $contra = password_hash($contra, PASSWORD_DEFAULT);
 
     $consulta = "UPDATE usuarios SET nombre='$nombre', apellido='$apellido', telefono='$telefono', correo='$correo', contrasena='$contrasena', fk_tipo_usuario='$fk_tipo_usuario' WHERE id_usuario=$id_usuario";
 
