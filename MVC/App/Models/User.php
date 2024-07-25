@@ -10,6 +10,125 @@ class User extends Model{
     parent::__construct('id_usuario', 'usuarios', $connection);
   }
 
+  public function autenticateUser($mail="", $password="", $rememberUser=false){
+
+    try {
+
+      $tokenValidated = false;
+
+      // -------------- If the user has a validaton cookie --------------
+      if(isset($_COOKIE['token']) && ($mail == "" && $password == "")){
+
+        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE token=:token");
+        $stmt->bindValue(":token", $_COOKIE['token']);
+        $stmt->execute();
+
+        if($stmt->rowCount() != 0){
+          $user = $stmt->fetch();
+          $expTokenBD = $user['exp_token'];
+
+          //If the cookie expired
+          if(time() > strtotime($expTokenBD)){
+            throw new Exception("El token de validación a expirado.\nVuelve a iniciar sesión.");
+          }else{
+            $tokenValidated = true;
+          }
+
+        }else{
+
+          throw new Exception("No se reconoce el token del usuario, vuelva a iniciar sesión.");
+        }
+
+      }else{
+
+        // -------------- if the user enters mail and password --------------
+        // Recover user by email
+        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE correo=:correo");
+        $stmt->bindValue(":correo", $mail);
+        $stmt->execute();
+
+        if($stmt->rowCount() <= 0){
+          throw new Exception("El correo ingresado no se encuentra registrado.");
+        }
+
+        $user = $stmt->fetch();
+      }
+
+      
+      // Validate password OR token
+      if(password_verify($password, $user['contrasena']) || $tokenValidated){
+
+        // Loads user data into the session
+        session_start();
+        $_SESSION['user_id'] = $user['id_usuario'];
+        $_SESSION['user_name'] = $user['nombre'];
+        $_SESSION['user_lastname'] = $user['apellido'];
+        $_SESSION['user_phone'] = $user['telefono'];
+        $_SESSION['user_mail'] = $user['correo'];
+        $_SESSION['user_type'] = $user['fk_tipo_usuario'];
+        if($rememberUser){
+          $token = $this->getToken($_SESSION['user_id']);
+          if($token != false){
+            setCookie("token", $token, time()+(3600*24*7));
+          }
+        }
+
+        return [
+          "autenticated"=>true,
+          "message"=>"",
+          "user_type"=>$_SESSION['user_type']
+        ];
+
+      }else{
+
+        throw new Exception('Correo y/o contraseña incorrectos.');
+      }
+      
+    } catch (\Throwable $e) {
+
+      $message = $e->getMessage();
+
+      return [
+        "autenticated"=>false,
+        "message"=>$message,
+        "user_type"=>""
+      ];
+      
+    }
+
+  }
+
+  public function getToken($id_usuario){
+
+    try {
+
+      $token = bin2hex(random_bytes(16));
+      $expiracionTimestamp = time() + (3600*24*7); //El token durará 1 semana
+      $expiracion = date('Y-m-d H:i:s', $expiracionTimestamp);
+
+      $stmt = $this->db->prepare("UPDATE usuarios SET token=:token, exp_token=:exp_token WHERE id_usuario=:id_user");
+      $stmt->bindValue(":token", $token);
+      $stmt->bindValue(":exp_token", $expiracion);
+      $stmt->bindValue(":id_user", $id_usuario);
+      $stmt->execute();
+
+      if($stmt->rowCount() != 0){
+
+        return $token;
+      }else{
+
+        throw new Exception("Error al crear el token para el usuario $id_usuario");
+      }
+      
+    } catch (\Throwable $e) {
+
+      echo $e->getMessage();
+      return false;
+      
+    }
+
+  }
+
 
 
 }

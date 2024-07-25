@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
   <!-- Custom Styles -->
   <link rel="stylesheet" href="<?=ROOT?>/Assets/css/styles.css">
+  <script>
+    //Guarda la variable de PHP con el URL del directorio
+    var ROOT = '<?= ROOT ?>';
+  </script>
   <title>Salón de Belleza M&G</title>
 </head>
 
@@ -42,6 +46,13 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav w-100 d-flex flex-lg-row justify-content-evenly">
+
+          <li class="nav-item p-2">
+            <a class="nav-link active text-light fw-bold text-end" aria-current="page" href="<?=$parameters['href'] ?? ROOT.'/user/login'?>">
+              <?= $parameters['title'] ?? "Iniciar Sesión"?>
+              <img src="<?=ROOT?>/Assets/images/nav-user.svg" class="nav_icon" alt="logo minimalista de usuario">
+            </a>
+          </li>
 
           <li class="nav-item p-2">
             <a class="nav-link active text-light fw-bold text-end" aria-current="page" href="<?=ROOT?>/user/market">

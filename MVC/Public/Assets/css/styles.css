@@ -637,6 +637,14 @@ footer {
 }
 
 
+/* -------- Tienda -------- */
+.login {
+  background-color: var(--color-verdeFondo);
+  padding: 3rem;
+  min-height: 80vh;
+}
+
+
 
 
 

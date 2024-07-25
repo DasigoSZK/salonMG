@@ -59,6 +59,13 @@
         <ul class="navbar-nav w-100 d-flex flex-lg-row justify-content-evenly">
 
           <li class="nav-item p-2">
+            <a class="nav-link active text-light fw-bold text-end" aria-current="page" href="<?=$parameters['href'] ?? ROOT.'/user/login'?>">
+              <?= $parameters['title'] ?? "Iniciar Sesión"?>
+              <img src="<?=ROOT?>/Assets/images/nav-user.svg" class="nav_icon" alt="logo minimalista de usuario">
+            </a>
+          </li>
+
+          <li class="nav-item p-2">
             <a class="nav-link active text-light fw-bold text-end" aria-current="page" href="<?=ROOT?>/user/market">
               Tienda
               <img src="<?=ROOT?>/Assets/images/nav-tienda.svg" class="nav_icon" alt="logo minimalista de tienda">
