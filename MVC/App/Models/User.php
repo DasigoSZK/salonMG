@@ -129,6 +129,65 @@ class User extends Model{
 
   }
 
+  public function registerUser($name, $lastname, $phone, $mail, $password, $user_type){
+
+    try { 
+      // ---------- VALIDATIONS ----------
+      if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+
+        throw new Exception("El correo ingresado no tiene un fomato válido...");
+      }
+      // Password Hashing (BLOWFISH)
+      $password = password_hash($password, PASSWORD_DEFAULT);
+
+
+
+      // ---------- QUERY ----------
+      $stmt = $this->db->prepare("INSERT INTO usuarios (nombre, apellido, telefono, correo, contrasena, fk_tipo_usuario) VALUES
+      (:names, :lastname, :phone, :mail, :pass, :user_type)");
+      $stmt->bindValue(":names", $name);
+      $stmt->bindValue(":lastname", $lastname);
+      $stmt->bindValue(":phone", $phone);
+      $stmt->bindValue(":mail", $mail);
+      $stmt->bindValue(":pass", $password);
+      $stmt->bindValue(":user_type", $user_type);
+      if($stmt->execute()){
+
+        if($stmt->rowCount() <= 0){
+          $errorInfo = $stmt->errorInfo();
+          $errorCodigo = $errorInfo[0];
+          $errorMensaje = $errorInfo[2];
+          throw new Exception("Ocurrió un error en el registro.<br>Código: $errorCodigo <br>Mensaje: $errorMensaje");
+
+        }else{
+
+          return [
+            "status"=>true,
+            "message"=>"Usuario registrado con éxito",
+            "code"=>""
+          ];
+
+        }
+      }else{
+        $errorInfo = $stmt->errorInfo();
+        $errorMessage = "SQLSTATE: " . $errorInfo[0] . "\nError Code: " . $errorInfo[1] . "\nMessage: " . $errorInfo[2];
+        throw new Exception($errorMessage);
+      }
+
+    } catch (\Throwable $e) {
+
+      $message = $e->getMessage();
+      $code = $e->getCode() ? $e->getCode() : 0;
+
+      return [
+        "status"=>false,
+        "message"=>$message,
+        "code"=>$code
+      ];
+      
+    }
+  }
+
 
 
 }

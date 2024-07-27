@@ -1,7 +1,7 @@
 <main class="login">
 
   <article class="login_container">
-    <h2 class="login_title text-light text-center mb-5 display-2 fw-bold">Bienvenido a<br>Salón de Belleza M&G</h2>
+    <h2 class="login_title text-light text-center mb-5 display-5 fw-bold">Bienvenido a<br>Salón de Belleza M&G</h2>
 
     <div id='loginerror' class='d-none'>
       <p class='loginerror_p'></p>
@@ -22,7 +22,7 @@
       </div>
 
 
-      <img class="form_img d-none d-md-block col-6" src="<?=ROOT?>/Assets/images/nav-salonLogo.png"
+      <img class="loginform_img d-none d-md-block col-6" src="<?=ROOT?>/Assets/images/nav-salonLogo.png"
         alt="logo de salon M&G">
 
       <div class="mb-3 col-12">
@@ -31,13 +31,13 @@
       </div>
 
       <div class="mb-3 col-12">
-        <button type="submit" class="btn btn-primary fw-bold custom--btn mx-auto mt-5 d-block">login</button>
+        <button type="submit" class="btn btn-primary fw-bold loginform_btn mx-auto mt-4 d-block">login</button>
       </div>
 
       
     </form>
   </article>
-  <a href=""><p class=''>¿Aún no tienes cuenta? <b class=''>Regístrate aquí</b></p></a>
+  <a href="<?=ROOT?>/user/signupForm"><p class='text-center mt-2 fs-5'>¿Aún no tienes cuenta? <b class='text-primary'>Regístrate aquí</b></p></a>
 
 </main>
 <script src='<?=ROOT?>/Assets/js/login.js'></script>

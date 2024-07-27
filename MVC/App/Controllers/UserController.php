@@ -166,6 +166,49 @@ class UserController extends Controller{
 
     $this->render("signup", [], "user");
   }
+
+  public function newUser(){
+
+    $res = new Result();
+
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+      //Captura formData (safe way)
+      $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+      $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+      $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+      $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_STRING);
+      $password = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
+      $user_type = 1;
+
+      $response = $this->userModel->registerUser($name, $lastname, $phone, $mail, $password, $user_type);
+
+      if($response['status'] == true){
+        $res->success = true;
+        $res->result = null;
+        $res->message = "Te registraste como \"$name $lastname\".<br>Ingresa al sitio utilizando tu correo electrónico.";
+      }else{
+
+        $message = str_contains($response['message'], "SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry")
+        ? "El correo ingresado ya se encuentra registrado." 
+        : $response['message'];
+
+        $res->success = false;
+        $res->result = $response['code'];
+        $res->message = $message;
+      }
+
+      echo json_encode($res);
+
+    }else{
+
+      $res->success = false;
+      $res->result = null;
+      $res->message = 'Error: Method no allowed';
+
+      echo json_encode($res);
+    }
+  }
 }
 
 ?>
