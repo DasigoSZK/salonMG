@@ -18,7 +18,9 @@ class Controller {
 
   public function error(){
 
-    session_start();
+    if(session_status() === PHP_SESSION_NONE){
+      session_start();
+    }
 
     $parameters = [];
     if(isset($_SESSION['user_id'])){

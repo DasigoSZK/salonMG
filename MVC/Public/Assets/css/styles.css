@@ -105,6 +105,14 @@ a {
 
 /* ********Componentes******** */
 
+/* ---- Card ---- */
+
+.default_card {
+  background-color: var(--color-fondoDivs);
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
 /* ---- NavBar ---- */
 
 .nav_logo {
@@ -209,6 +217,22 @@ footer {
   margin-bottom: 2rem;
 }
 
+/* ---- Modal ---- */
+.modal {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal_input {
+  border: 0;
+  border-bottom: 2px solid black;
+  border-radius: 0;
+  background-color: white;
+  color: black;
+  width: 80%;
+  margin-top: 0.5rem;
+}
 
 
 /* ********Estilos de cada Página******** */
@@ -609,13 +633,121 @@ footer {
 
 
 
+/* -------- show product page -------- */
+.showproduct {
+  background-color: var(--color-verdeFondo);
+  padding: 3rem;
+  min-height: 100vh;
+}
+
+.showproduct section {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.showproduct_img {
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.showproduct_hr {
+  max-width: 1200px;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 4rem 0;
+  opacity: 1;
+}
+
+.showproduct_price {
+  color: var(--color-violetaPrecio);
+}
+
+.showproduct_stockbtn {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-fondoDivs);
+  border: 2px solid black;
+  margin: 1rem 0.5rem;
+  border-radius: 10px;
+  font-size: 2rem;
+  padding: 0;
+}
+
+#product_units {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 0;
+  border-bottom: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  max-width: 60px;
+  -moz-appearance: textfield;
+}
+
+#product_units::-webkit-outer-spin-button,
+#product_units::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stockbtn_signs {
+  padding: 0 1rem;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.showproduct_btn_a {
+  width: 100%;
+  max-width: 450px;
+}
+
+.showproduct_btn {
+  border: 2px solid var(--color-violetaBtn);
+  background-color: var(--color-violetaBtn);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+.showproduct_btn:hover {
+  background-color: var(--color-verdeFondo);
+  color: var(--color-violetaBtn);
+  border: 2px solid var(--color-violetaBtn);
+}
+
+.showproduct_btn--secondary {
+  background-color: #9460a5;
+  color: var(--color-verdeFondo);
+  border: 2px solid #9460a5;
+}
+
+.showproduct_btn--secondary:hover {
+  background-color: var(--color-verdeFondo);
+  color: #9460a5;
+  border: 2px solid #9460a5;
+}
+
+.showproduct_description {
+  max-width: 1200px;
+}
+
+
+
+
 
 /* -------- Error -------- */
 
 .error {
   background-color: var(--color-verdeFondo);
   padding: 3rem;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .error_btn {
@@ -801,8 +933,78 @@ footer {
 .useraccount {
   background-color: var(--color-verdeFondo);
   min-height: 100vh;
+  padding: 3rem 2rem 2rem 2rem;
 }
 
+.useraccount_h1 {
+  font-size: 4rem;
+}
+
+.purchases-container {
+  width: 100%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.purchases-accordion_header {
+  background-color: #ced4da !important;
+  color: var(--text-darkText) !important;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.purchases-accordion-body {
+  background-color: #ced4da !important;
+  width: 100%;
+}
+
+.accordionpurchase-date {
+  margin-left: 5px;
+  display: block;
+}
+
+.purchase_img {
+  width: 100%;
+  max-width: 72px;
+  height: 72px;
+  object-fit: cover;
+}
+
+.purchase_total {}
+
+/* -------- UserAccount-edit -------- */
+.editaccount {
+  background-color: var(--color-verdeFondo);
+  padding: 2rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.editaccount_container {
+  max-width: 700px;
+}
+
+.editform_editbtn {
+  background-color: transparent;
+  border-radius: 10px;
+  border-style: none;
+  max-width: 42px;
+}
+
+.editform_editbtn img {
+  max-width: 100%;
+  height: auto;
+}
+
+#editform .custom--input:disabled {
+  background-color: var(--color-verdeFondo);
+}
+
+#editform .custom--input:disabled::placeholder {
+  color: #a8a8a8;
+}
 
 
 
@@ -866,15 +1068,13 @@ footer {
 
 @media(min-width: 1024px) {
 
-  /* ---- nav ---- */
-  /*.nav_carrito {
-    margin-top: 1rem;
-  }*/
-
   /* ---- login ---- */
   .login_container,
-  .signup_container {
+  .signup_container,
+  .editaccount_container {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
     padding: 3rem 6rem 2rem 6rem;
   }
+
+  /* ---- showProduct ---- */
 }

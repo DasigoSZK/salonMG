@@ -45,7 +45,7 @@
       <hr class="d-none d-lg-block nav_hr">
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav w-100 d-flex flex-lg-row justify-content-evenly">
+        <ul class="navbar-nav w-100 d-flex flex-lg-row-reverse justify-content-evenly">
 
           <li class="nav-item p-2">
             <a class="nav-link active text-light fw-bold text-end" aria-current="page" href="<?=$parameters['href'] ?? ROOT.'/user/login'?>">

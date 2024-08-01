@@ -35,6 +35,34 @@ class ProductController extends Controller{
 
     echo json_encode($res);
   }
+
+  public function showProduct(){
+
+    if(isset($_GET['product'])){
+
+      $product_id = $_GET['product'];
+
+      // GET product data
+      $product_data = $this->productModel->getById($product_id); 
+
+      // Res object
+      $res = new Result();
+
+      if(is_array($product_data)){
+
+        $this->render("showproduct", [
+          "product"=>$product_data
+        ], "user");
+
+      }else{
+        $this->error();
+
+      }
+
+    }else{
+      $this->error();
+    }
+  }
 }
 
 ?>

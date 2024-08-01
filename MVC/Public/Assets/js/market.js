@@ -81,9 +81,13 @@ function insertProducts(products, page, pages, $domElement, searchParam = "") {
       let tempDiv = d.createElement("div");
       tempDiv.className = "card bg-transparent border-0 mb-5 mx-auto col-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3";
       tempDiv.innerHTML = `
-        <img src="${ROOT}/Assets/images/${prod.foto}" class="card-img-top" alt="4 botellas del kit de higiene facial">
+        <a href='${ROOT}/product/showProduct?product=${prod.id_producto}'>
+          <img src="${ROOT}/Assets/images/${prod.foto}" class="card-img-top" alt="4 botellas del kit de higiene facial">
+        </a>
         <div class="card-body">
-          <h5 class="card-title text-white fs-4 text-center">${prod.nombre_producto}</h5>
+          <a href='${ROOT}/product/showProduct?product=${prod.id_producto}'>
+            <h5 class="card-title text-white fs-4 text-center">${prod.nombre_producto}</h5>
+          </a>
           <p class="card-text card_price text-white text-center fs-2">
             $${prod.precio}
           </p>

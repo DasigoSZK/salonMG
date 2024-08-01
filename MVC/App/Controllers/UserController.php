@@ -144,13 +144,138 @@ class UserController extends Controller{
 
   public function myAccount(){
 
+    session_start();
     //Additional parameters
     $parameters = [
-      "title"=>"Cerrar sesión",
+      "title"=>"<span style='color:#B22222'>Cerrar sesión</span>",
       "href"=>ROOT."/user/logout"
     ];
 
     $this->render("useraccount", $parameters, "user");
+  }
+
+  public function editAccount(){
+
+    session_start();
+
+    if(isset($_SESSION['user_id'])){
+      // Get user info
+      $userInfo = $this->userModel->getById($_SESSION['user_id']);
+
+      // Additional parameters
+      $parameters = [
+        "title"=>"<span style='color:#B22222'>Cerrar sesión</span>",
+        "href"=>ROOT."/user/logout",
+        "user"=>$userInfo
+      ];
+
+      $this->render("useraccount-edit", $parameters, "user");
+    }else{
+
+      $this->error();
+    }
+    
+  }
+
+  public function validateUser(){
+
+    $res = new Result();  
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+      // Capture form data (safe way)
+      $userID = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
+      $userPassword = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
+
+      // Validate user data
+      $autResponse = $this->userModel->validatePassword($userID, $userPassword);
+
+      $res->success = $autResponse['status'] ? true : false;
+      $res->result = "";
+      $res->message = $autResponse['message'];
+
+      echo json_encode($res);
+
+    }else{
+
+      $res->success = false;
+      $res->result = null;
+      $res->message = 'Error: Method no allowed';
+
+      echo json_encode($res);
+
+    }
+    
+  }
+
+  public function editUser(){
+
+    $res = new Result();  
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+      // ---- Capture form data (safe way) ----
+      $id = isset($_POST['id_user']) ? filter_input(INPUT_POST, 'id_user', FILTER_SANITIZE_STRING) : "";
+      $name = isset($_POST['name']) ? filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING) : "";
+      $lastname = isset($_POST['lastname']) ? filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING) : "";
+      $phone = isset($_POST['phone']) ? filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING) : "";
+      $mail = isset($_POST['mail']) ? filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_STRING) : "";
+      $pass = isset($_POST['pass']) ? filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING) : "";
+
+      // ---- Update user data ----
+      if($pass != ""){
+
+        $pass = password_hash($pass, PASSWORD_DEFAULT);
+
+        $rowsAffected = $this->userModel->updateById($id, [
+          "nombre"=>$name,
+          "apellido"=>$lastname,
+          "telefono"=>$phone,
+          "correo"=>$mail,
+          "contrasena"=>$pass
+        ]);
+
+      }else{
+        $rowsAffected = $this->userModel->updateById($id, [
+          "nombre"=>$name,
+          "apellido"=>$lastname,
+          "telefono"=>$phone,
+          "correo"=>$mail
+        ]);
+      }
+
+      // ---- Res ----
+      if($rowsAffected == 0){
+
+        $res->success = false;
+        $res->result = null;
+        $res->message = "Ocurrió un error al actualizar los datos.";
+
+      }else{
+
+        $res->success = true;
+        $res->result = null;
+        $res->message = "Los datos se actualizaron exitosamente.";
+
+        session_start();
+        $_SESSION['user_id'] = $id;
+        $_SESSION['user_name'] = $name;
+        $_SESSION['user_lastname'] = $lastname;
+        $_SESSION['user_phone'] = $phone;
+        $_SESSION['user_mail'] = $mail;
+      }
+
+      echo json_encode($res);
+
+    }else{
+
+      $res->success = false;
+      $res->result = null;
+      $res->message = 'Error: Method no allowed';
+
+      echo json_encode($res);
+
+    }
   }
 
   public function logout(){

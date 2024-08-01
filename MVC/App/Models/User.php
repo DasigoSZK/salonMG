@@ -188,6 +188,46 @@ class User extends Model{
     }
   }
 
+  public function userPurchases($id_usuario){
+
+    try {
+      
+    } catch (\Throwable $e) {
+      
+    }
+  }
+
+  public function validatePassword($id_user, $password){
+
+    try {
+      
+      $user = $this->getById($id_user);
+
+      if($user == null){
+        throw new Exception("No existe el usuario con id=$id_user.");
+      }
+
+      if(password_verify($password, $user['contrasena'])){
+        return [
+          "status"=> true,
+          "message"=> "Validado con éxito"
+        ];
+      }else{
+        throw new Exception("Contraseña incorrecta");
+      }
+
+    } catch (\Throwable $e) {
+      
+      $message = $e->getMessage();
+
+      return [
+        "status"=> false,
+        "message"=> $message
+      ];
+
+    }
+  }
+
 
 
 }
