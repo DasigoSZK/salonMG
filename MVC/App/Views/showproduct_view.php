@@ -11,8 +11,8 @@
 
       <!-- Title and Price -->
       <article class=''>
-        <h1 class='text-white fw-bold display-4'><?=$parameters['product']['nombre_producto']?></h1>
-        <h3 class='showproduct_price display-5 text-start mt-2 mb-3'>$<?=$parameters['product']['precio']?></h3>
+        <h1 class='text-white fw-bold display-5'><?=$parameters['product']['nombre_producto']?></h1>
+        <h3 class='showproduct_price display-6 text-start mt-2 mb-3'>$<?=$parameters['product']['precio']?></h3>
       </article>
 
       <!-- Purchase buttons -->
@@ -22,7 +22,7 @@
           <div class='d-flex align-items-center justify-content-start'>
             <div class='showproduct_stockbtn'>
               <span id='minus' class='stockbtn_signs'><b>-</b></span>
-              <input type="number" name="units" id="product_units" value='1' step='1' min='1' max='<?=$parameters['product']['stock']?>'>
+              <input class='fs-5' type="number" name="units" id="product_units" value='1' step='1' min='1' max='<?=$parameters['product']['stock']?>'>
               <span id='plus' class='stockbtn_signs'><b>+</b></span>
             </div>
             <span class='text-secondary fs-5'>(<?=$parameters['product']['stock']?> disponibles)</span>
@@ -31,7 +31,8 @@
 
         <div class='d-flex justify-content-center'>
           <div class='d-flex flex-column align-items-start w-100'>
-            <a class='showproduct_btn_a mx-auto' href=""><button class='btn showproduct_btn mt-4 mb-2'>Comprar ahora</button></a>
+            <a class='showproduct_btn_a mx-auto' href=""><button class='btn showproduct_btn mt-4 mb-2'>
+              Comprar ahora <img class='d-inline mp-icon' src='<?=ROOT?>/Assets/images/mercadopago_icon.svg'></button></a>
             <a class='showproduct_btn_a mx-auto' href=""><button class='btn showproduct_btn showproduct_btn--secondary'>Agregar al carrito</button></a>
           </div>
         </div>

@@ -86,14 +86,16 @@ function insertProducts(products, page, pages, $domElement, searchParam = "") {
         </a>
         <div class="card-body">
           <a href='${ROOT}/product/showProduct?product=${prod.id_producto}'>
-            <h5 class="card-title text-white fs-4 text-center">${prod.nombre_producto}</h5>
+            <h5 class="card-title text-white fs-4 text-start">${prod.nombre_producto}</h5>
           </a>
-          <p class="card-text card_price text-white text-center fs-2">
+          <p class="card-text card_price text-white text-start fs-2">
             $${prod.precio}
           </p>
-          <div class="d-flex justify-content-between">
-            <a href="${ROOT}/user/error" data-id='${prod.id_producto}' class="btn btn-shop ms-auto me-2">Comprar</a>
-            <a href="${ROOT}/user/error" data-id='${prod.id_producto}' class="btn btn-shop rounded-circle mx-auto"><i class="bi bi-cart"></i></a>
+          <div class="d-flex flex-column flex-lg-row justify-content-between">
+            <a href="${ROOT}/user/error" data-id='${prod.id_producto}' class="btn btn-shop btn-buy ms-auto me-2">
+              Comprar <img class='d-inline mp-icon' src='${ROOT}/Assets/images/mercadopago_icon.svg'>
+            </a>
+            <a href="${ROOT}/user/error" data-id='${prod.id_producto}' class="btn btn-shop btn-shop--cart mx-auto"><i class="bi bi-cart"></i></a>
           </div>
         </div>
     `;
