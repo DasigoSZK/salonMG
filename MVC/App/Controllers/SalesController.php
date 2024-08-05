@@ -2,6 +2,9 @@
 
 require_once(__DIR__ . "/../Models/Sales.php");
 require_once(__DIR__ . "/../Models/SalesHasProducts.php");
+// MercadoPago namespaces
+use \MercadoPago\Client\Preference\PreferenceClient;
+use \MercadoPago\MercadoPagoConfig;
 
 class SalesController extends Controller{
 
@@ -17,7 +20,7 @@ class SalesController extends Controller{
   }
 
   /* ---------------------- Functions ---------------------- */
-  function userPurchases(){
+  public function userPurchases(){
 
     session_start();
 
@@ -89,6 +92,34 @@ class SalesController extends Controller{
     echo json_encode($res);
 
   }
+
+  public function paymentWebHook(){
+
+    // Gets the MP notification
+    $MPNotification = filet_get_contents("php://input");
+    $data = json_decode($MPNotification, true);
+
+    if(isset($data['type']) && $data['type'] == 'payment'){
+
+      // Recover customer data
+      $paymentId = $data['data']['id'];
+      $customer = new PaymentClient();
+      $payment = $customer->get($paymentId);
+
+      // Recover payment id
+      $payment->id;
+
+      // Confirm the payment of the product
+      
+
+
+    }
+
+    http_response_code(200);
+
+  }
+
+
 
 }
 

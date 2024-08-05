@@ -1,3 +1,4 @@
+<script src="https://sdk.mercadopago.com/js/v2"></script>
 <main class="showproduct">
 
   
@@ -30,10 +31,9 @@
         </div>
 
         <div class='d-flex justify-content-center'>
-          <div class='d-flex flex-column align-items-start w-100'>
-            <a class='showproduct_btn_a mx-auto' href=""><button class='btn showproduct_btn mt-4 mb-2'>
-              Comprar ahora <img class='d-inline mp-icon' src='<?=ROOT?>/Assets/images/mercadopago_icon.svg'></button></a>
-            <a class='showproduct_btn_a mx-auto' href=""><button class='btn showproduct_btn showproduct_btn--secondary'>Agregar al carrito</button></a>
+          <div id='btn_container' class='d-flex flex-column align-items-start w-100'>
+            <div id='wallet_container' class='mx-auto showproduct_btn_a'></div>
+            <a class='showproduct_btn_a mx-auto' href=""><button class='btn showproduct_btn showproduct_btn--secondary'><i class="bi bi-cart"></i></button></a>
           </div>
         </div>
 
@@ -57,4 +57,17 @@
   </section>
 
 </main>
+
+<script>
+  var prod_id = "<?=$parameters['product']['id_producto']?>";
+  var prod_name = "<?=$parameters['product']['nombre_producto']?>";
+  var prod_price = <?=$parameters['product']['precio']?>;
+  var prod_description = "<?=$parameters['product']['descripcion'] ?? ""?>";
+  var prod_photo = "<?=$parameters['product']['foto'] ?? ""?>";
+  var user_name = "<?=$_SESSION['user_name'] ?? ""?>";
+  var user_lastname = "<?=$_SESSION['user_lastname'] ?? ""?>";
+  var user_email = "<?=$_SESSION['user_mail'] ?? ""?>";
+  var prod_quantity = 1;
+  var MP_PUBLIC_KEY = "<?=MP_PUBLIC_KEY?>";
+</script>
 <script src='<?=ROOT?>/Assets/js/showproduct.js'></script>

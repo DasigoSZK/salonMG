@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/../Models/User.php");
 
+
 class UserController extends Controller{
 
   private $userModel;
@@ -333,6 +334,30 @@ class UserController extends Controller{
 
       echo json_encode($res);
     }
+  }
+
+  public function successfulPayment(){
+
+    if(session_status() === PHP_SESSION_NONE){
+      session_start();
+    }
+
+    $parameters = [];
+
+    $this->render("successfulPay", $parameters, "user");
+
+  }
+
+  public function failedPayment(){
+
+    if(session_status() === PHP_SESSION_NONE){
+      session_start();
+    }
+
+    $parameters = [];
+
+    $this->render("failedPayment", $parameters, "user");
+
   }
 }
 

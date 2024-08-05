@@ -1,5 +1,6 @@
 <?php
-
+include_once(__DIR__ . "/tokens.php");
+require_once(__DIR__ . "/../vendor/autoload.php");
 require_once(__DIR__ . "/Helpers/common.php");
 require_once(__DIR__ . "/Helpers/extractURLPath_function.php");
 require_once(__DIR__ . "/config.php");

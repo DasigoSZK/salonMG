@@ -732,7 +732,7 @@ footer {
 
 .showproduct_btn_a {
   width: 100%;
-  max-width: 450px;
+  max-width: 450px !important;
 }
 
 .showproduct_btn {
@@ -751,14 +751,14 @@ footer {
 }
 
 .showproduct_btn--secondary {
-  background-color: var(--color-btn-cart);
-  color: white;
+  background-color: var(--color-verdeFondo);
+  color: var(--color-btn-cart);
   border: 2px solid var(--color-btn-cart);
 }
 
 .showproduct_btn--secondary:hover {
-  background-color: var(--color-verdeFondo);
-  color: var(--color-btn-cart);
+  background-color: var(--color-btn-cart);
+  color: white;
   border: 2px solid var(--color-btn-cart);
 }
 
@@ -767,6 +767,16 @@ footer {
 }
 
 
+/* -------- Successful pay page -------- */
+.successfulPay {
+  min-height: 80vh;
+  background-color: var(--color-verdeFondo);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.successPay {}
 
 
 

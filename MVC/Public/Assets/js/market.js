@@ -92,8 +92,8 @@ function insertProducts(products, page, pages, $domElement, searchParam = "") {
             $${prod.precio}
           </p>
           <div class="d-flex flex-column flex-lg-row justify-content-between">
-            <a href="${ROOT}/user/error" data-id='${prod.id_producto}' class="btn btn-shop btn-buy ms-auto me-2">
-              Comprar <img class='d-inline mp-icon' src='${ROOT}/Assets/images/mercadopago_icon.svg'>
+            <a href="${ROOT}/product/showProduct?product=${prod.id_producto}" data-id='${prod.id_producto}' class="btn btn-shop btn-buy ms-auto me-2">
+              Comprar
             </a>
             <a href="${ROOT}/user/error" data-id='${prod.id_producto}' class="btn btn-shop btn-shop--cart mx-auto"><i class="bi bi-cart"></i></a>
           </div>
