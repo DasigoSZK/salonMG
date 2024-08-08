@@ -33,7 +33,11 @@
         <div class='d-flex justify-content-center'>
           <div id='btn_container' class='d-flex flex-column align-items-start w-100'>
             <div id='wallet_container' class='mx-auto showproduct_btn_a'></div>
-            <a class='showproduct_btn_a mx-auto' href=""><button class='btn showproduct_btn showproduct_btn--secondary'><i class="bi bi-cart"></i></button></a>
+            <span class='showproduct_btn_a mx-auto'>
+              <button id='cartBtn' data-id='<?=$parameters['product']['id_producto']?>' class='btn showproduct_btn showproduct_btn--secondary'>
+                <i class="bi bi-cart"></i>
+              </button>
+            </span>
           </div>
         </div>
 
@@ -64,10 +68,11 @@
   var prod_price = <?=$parameters['product']['precio']?>;
   var prod_description = "<?=$parameters['product']['descripcion'] ?? ""?>";
   var prod_photo = "<?=$parameters['product']['foto'] ?? ""?>";
+  var user_id = <?=$_SESSION['user_id']?>;
   var user_name = "<?=$_SESSION['user_name'] ?? ""?>";
   var user_lastname = "<?=$_SESSION['user_lastname'] ?? ""?>";
   var user_email = "<?=$_SESSION['user_mail'] ?? ""?>";
   var prod_quantity = 1;
   var MP_PUBLIC_KEY = "<?=MP_PUBLIC_KEY?>";
 </script>
-<script src='<?=ROOT?>/Assets/js/showproduct.js'></script>
+<script type='module' src='<?=ROOT?>/Assets/js/showproduct.js'></script>

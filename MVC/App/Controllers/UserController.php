@@ -95,6 +95,21 @@ class UserController extends Controller{
     $this->render('aboutus', $parameters, 'user');
   }
 
+  public function shoppingCart(){
+
+    session_start();
+
+    $parameters = [];
+    if(isset($_SESSION['user_id'])){
+      $parameters = [
+        "title"=>"Mi cuenta",
+        "href"=>ROOT."/user/myAccount"
+      ];
+    }
+
+    $this->render('shoppingCart', $parameters, 'user');
+  }
+
   public function login(){
 
     // session_start();
@@ -338,11 +353,14 @@ class UserController extends Controller{
 
   public function successfulPayment(){
 
-    if(session_status() === PHP_SESSION_NONE){
-      session_start();
-    }
+    session_start();
 
+    //Additional parameters
     $parameters = [];
+    if(isset($_SESSION['user_id'])){
+      $parameters["title"] = "Mi Cuenta";
+      $parameters['href'] = ROOT."/user/myAccount";
+    }
 
     $this->render("successfulPay", $parameters, "user");
 
@@ -350,11 +368,14 @@ class UserController extends Controller{
 
   public function failedPayment(){
 
-    if(session_status() === PHP_SESSION_NONE){
-      session_start();
-    }
-
+    session_start();
+    
+    //Additional parameters
     $parameters = [];
+    if(isset($_SESSION['user_id'])){
+      $parameters["title"] = "Mi Cuenta";
+      $parameters['href'] = ROOT."/user/myAccount";
+    }
 
     $this->render("failedPayment", $parameters, "user");
 

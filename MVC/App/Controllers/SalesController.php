@@ -41,6 +41,7 @@ class SalesController extends Controller{
             "id_venta" => $sale['id_venta'],
             "fecha" => $sale['fecha'],
             "monto_total" => $sale['monto'],
+            "confirmado" => $sale['confirmado'] ? true : false,
             "productos" => []
           ];
           array_push($data, $arraySale);
@@ -93,6 +94,7 @@ class SalesController extends Controller{
 
   }
 
+  // NOT IMPLEMENTED YET
   public function paymentWebHook(){
 
     // Gets the MP notification
@@ -107,16 +109,69 @@ class SalesController extends Controller{
       $payment = $customer->get($paymentId);
 
       // Recover payment id
-      $payment->id;
+      $payment_id = $payment->id;
 
       // Confirm the payment of the product
-      
-
-
+      $this->salesModel->confirmPayment($payment_id);
     }
 
     http_response_code(200);
 
+  }
+
+  public function loadSale(){
+
+    if(session_status() === PHP_SESSION_NONE){
+      session_start();
+    }
+
+    // {user_id: 1, products: [{"prod_id": prod_id, "prod_price": prod_price, "prod_quantity": prod_quantity}]}
+    $JSONdata = file_get_contents('php://input');
+
+    $data = json_decode($JSONdata, true);
+
+    $user_id = $data['user_id'];
+    $products = $data['products'];
+
+    // Sale DATA
+    date_default_timezone_set("America/Argentina/Buenos_Aires");
+    $fecha = date('Y-m-d H:i:s');
+    $monto = 0;
+    foreach($products as $prod){
+      $monto += ($prod['prod_price'] * $prod['prod_quantity']);
+    }
+
+    // Inserts a "venta"
+    $this->salesModel->insert(['fecha'=>$fecha, 'monto'=>$monto, 'fk_usuario'=>$user_id]);
+    // last "venta" id
+    $venta_id = $this->salesModel->lastInsertId();
+    $_SESSION['lastpurchase_id'] = $venta_id;
+
+    // Creates a "ventas_has_productos" for each associated product
+    foreach($products as $prod){
+      $this->salesHasProductsModel->insert(['fk_venta'=>$venta_id, 'fk_producto'=>$prod['prod_id'], 'cantidad'=>$prod['prod_quantity']]);
+    }
+
+
+  }
+
+  public function loadPaymentId(){
+
+    session_start();
+
+    // Gets JSON data
+    $JSONdata = file_get_contents('php://input');
+
+    $data = json_decode($JSONdata, true);
+    $payment_id = $data['payment_id'];
+    $venta_id = $_SESSION['lastpurchase_id'];
+
+    // Loads payment_id into the last "venta"
+    $bdres = $this->salesModel->updateById($venta_id, ['mp_payment_id'=>$payment_id]);
+
+    unset($_SESSION['lastpurchase_id']);
+
+    return json_encode($bdres);
   }
 
 

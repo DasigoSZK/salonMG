@@ -42,7 +42,10 @@
 
         <div class="navbar_buttons justify-self-end min-width-120">
 
-          <a href="<?=ROOT?>/user/error"><img src="<?=ROOT?>/Assets/images/nav-carrito.svg" class="nav_carrito" alt="carrito de compras"></a>
+          <a class='cart_a' href="<?=ROOT?>/user/shoppingCart">
+            <span class='cartSpan'>0</span>
+            <img src="<?=ROOT?>/Assets/images/nav-carrito.svg" class="nav_carrito" alt="carrito de compras">
+          </a>
           <button class="navbar-toggler fs-2" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -195,7 +198,9 @@
 
   <!-- Boostrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src='<?=ROOT?>/Assets/js/market.js'></script>
+  <script type='module' src='<?=ROOT?>/Assets/js/market.js'></script>
+  <!-- Shopping Cart -->
+   <script type='module' src='<?=ROOT?>/Assets/js/domLoad.js'></script>
 </body>
 
 </html>

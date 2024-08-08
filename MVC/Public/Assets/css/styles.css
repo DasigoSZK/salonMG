@@ -150,6 +150,28 @@ a {
   margin-top: -7%;
 }
 
+.cart_a {
+  width: 42px;
+  height: 42px;
+  display: inline-block;
+  position: relative;
+}
+
+.cartSpan {
+  position: absolute;
+  top: 40%;
+  left: -10%;
+  border: 2px solid white;
+  border-radius: 100%;
+  background-color: rgba(54, 57, 54, 1);
+  font-weight: bold;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 19px;
+  font-size: 75%;
+}
+
 .nav_hr {
   color: white;
   border: 1px solid white;
@@ -974,6 +996,10 @@ footer {
   padding: 3rem 2rem 2rem 2rem;
 }
 
+.useraccount * {
+  max-width: 1200px;
+}
+
 .useraccount_h1 {
   font-size: 4rem;
 }
@@ -997,7 +1023,6 @@ footer {
 
 .accordionpurchase-date {
   margin-left: 5px;
-  display: block;
 }
 
 .purchase_img {
@@ -1044,6 +1069,79 @@ footer {
   color: #a8a8a8;
 }
 
+
+
+
+
+/* -------- Shopping Cart -------- */
+.shoppingCart {
+  background-color: var(--color-verdeFondo);
+  min-height: 80vh;
+  padding: 2rem 0.5rem;
+}
+
+.emptycart_a {
+  max-width: 180px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cart_container {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  background-color: var(--color-fondoDivs);
+  border-radius: 10px;
+  padding: 1rem 0.2rem;
+  max-width: 900px;
+}
+
+.cart_prod {}
+
+.prod_img {
+  max-width: 100%;
+  width: 72px;
+  height: 72px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.prod_trash {
+  max-width: 20px;
+  cursor: pointer;
+}
+
+.prod_quantitybtn {
+  border: 1px solid black;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  max-width: 100px;
+}
+
+#quantity_input {
+  /* border-left: 1px solid black;
+  border-right: 1px solid black; */
+  border: 0;
+  padding: 0;
+  text-align: center;
+  width: 33.3%;
+  -moz-appearance: textfield;
+}
+
+#quantity_input::-webkit-outer-spin-button,
+#quantity_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity_plus,
+.quantity_minus {
+  text-align: center;
+  width: 33.3%;
+  display: block;
+}
 
 
 /* ********Media-Queries******** */

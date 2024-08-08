@@ -41,8 +41,14 @@ class ProductController extends Controller{
 
   public function showProduct(){
 
-    if(session_status() === PHP_SESSION_NONE){
-      session_start();
+    session_start();
+
+    $parameters = [];
+    if(isset($_SESSION['user_id'])){
+      $parameters = [
+        "title"=>"Mi cuenta",
+        "href"=>ROOT."/user/myAccount"
+      ];
     }
 
     if(isset($_GET['product'])){
@@ -54,9 +60,8 @@ class ProductController extends Controller{
 
       if(is_array($product_data)){
 
-        $this->render("showproduct", [
-          "product"=>$product_data
-        ], "user");
+        $parameters['product'] = $product_data;
+        $this->render("showproduct", $parameters, "user");
 
       }else{
         $this->error();
@@ -145,6 +150,54 @@ class ProductController extends Controller{
 
     echo json_encode($res);
 
+  }
+
+  public function loadShoppingCart(){
+
+    // Gets JSON data
+    $JSONdata = file_get_contents('php://input');
+    $data = json_decode($JSONdata, true);
+
+    //Response
+    $res = new Result();
+
+    
+    if(isset($data['productos'])){
+
+      $cartProducts = $data['productos'];
+      $resProducts = [];
+
+      foreach($cartProducts as $prod){
+
+        $DBproduct = $this->productModel->getById($prod['prod_id']);
+
+        $resProd = [
+          "prod_id"=>$DBproduct['id_producto'],
+          "prod_name"=>$DBproduct['nombre_producto'],
+          "prod_price"=>$DBproduct['precio'],
+          "prod_quantity"=>(int)$prod['prod_quantity'],
+          "prod_stock"=>$DBproduct['stock'],
+          "prod_photo"=>$DBproduct['foto']
+        ];
+
+        array_push($resProducts, $resProd);
+      
+      }
+
+      $res->success = true;
+      $res->result = $resProducts;
+      $res->message = "Products data returned successfuly";
+
+    }else{
+
+      $res->success = false;
+      $res->result = null;
+      $res->message = "No products were sent";
+    }
+
+    echo json_encode($res);
+
+    
   }
 }
 

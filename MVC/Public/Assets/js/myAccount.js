@@ -26,13 +26,23 @@ async function getPurchases() {
       $accordion.classList.add("accordion-item", "purchases-accordion-body", "my-3");
 
       let formatedDate = formatDate(purchase.fecha);
+      let state = purchase.confirmado
+        ? "<span class='text-success fw-bold'>Confirmado</span>"
+        : "<span class='text-danger fw-bold'>Confirmación Pendiente</span>";
 
       $accordion.innerHTML = `
             <h2 class="accordion-header">
               <button class="accordion-button purchases-accordion_header collapsed text-white" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapse${purchase.id_venta}" aria-expanded="false"
                 aria-controls="panelsStayOpen-collapse${purchase.id_venta}">
-                <b>Compra N°${purchase.id_venta}: </b> <span class='accordionpurchase-date ml-5'>${formatedDate}</span>
+                <div class='d-flex flex-column flex-lg-row justify-content-between w-100'>
+                  <div>
+                    <b>Compra N°${purchase.id_venta}: </b> <span class='accordionpurchase-date ml-5'>${formatedDate}</span>
+                  </div>
+                  <div class='me-5 fs-6'>
+                    <b>Pago: </b>${state}
+                  </div>
+                </div>
               </button>
             </h2>
             <div id="panelsStayOpen-collapse${purchase.id_venta}" class="accordion-collapse collapse">

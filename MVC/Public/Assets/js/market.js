@@ -1,3 +1,5 @@
+import { addToShoppingCart, updateCartValue } from "./addToShoppingCart.js";
+
 const d = document;
 const $sectionCards = d.getElementById("productcards");
 
@@ -72,7 +74,7 @@ async function loadMarketProducts(search = "") {
 function insertProducts(products, page, pages, $domElement, searchParam = "") {
 
   // ----------------------------------------------- Products ------------------------------------------------------
-  $fragment = d.createDocumentFragment();
+  let $fragment = d.createDocumentFragment();
 
   if (products.length != 0) {
     products.forEach((prod) => {
@@ -80,6 +82,7 @@ function insertProducts(products, page, pages, $domElement, searchParam = "") {
       //CARD
       let tempDiv = d.createElement("div");
       tempDiv.className = "card bg-transparent border-0 mb-5 mx-auto col-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3";
+      tempDiv.id = `prod${prod.id_producto}`;
       tempDiv.innerHTML = `
         <a href='${ROOT}/product/showProduct?product=${prod.id_producto}'>
           <img src="${ROOT}/Assets/images/${prod.foto}" class="card-img-top" alt="4 botellas del kit de higiene facial">
@@ -95,7 +98,9 @@ function insertProducts(products, page, pages, $domElement, searchParam = "") {
             <a href="${ROOT}/product/showProduct?product=${prod.id_producto}" data-id='${prod.id_producto}' class="btn btn-shop btn-buy ms-auto me-2">
               Comprar
             </a>
-            <a href="${ROOT}/user/error" data-id='${prod.id_producto}' class="btn btn-shop btn-shop--cart mx-auto"><i class="bi bi-cart"></i></a>
+            <span data-id='${prod.id_producto}' class="btn btn-shop btn-shop--cart mx-auto">
+              <i data-id='${prod.id_producto}' class="bi bi-cart"></i>
+            </span>
           </div>
         </div>
     `;
@@ -118,25 +123,25 @@ function insertProducts(products, page, pages, $domElement, searchParam = "") {
 
 
   // ----------------- Pagination LINKS ---------------------
-  $pages = d.createElement("div");
+  let $pages = d.createElement("div");
   $pages.classList.add("pages");
 
-  $pagesText = d.createElement("p");
+  let $pagesText = d.createElement("p");
   $pagesText.classList.add("pagination_text");
   $pagesText.textContent = "Páginas:";
 
-  $linkContainer = d.createElement("div");
+  let $linkContainer = d.createElement("div");
   $linkContainer.className = 'pagination';
 
   $pages.appendChild($pagesText);
 
   for (let i = 1; i <= pages; i++) {
     //<a>
-    $link = d.createElement("a");
+    let $link = d.createElement("a");
     $link.href = `${ROOT}/user/market?page=${i}${searchParam}`;
     $link.classList.add("page_link");
     //<button>
-    $linkBtn = d.createElement("button");
+    let $linkBtn = d.createElement("button");
     $linkBtn.textContent = i;
     $linkBtn.type = "button";
     $linkBtn.className = "pagination_btn";
@@ -155,6 +160,30 @@ function insertProducts(products, page, pages, $domElement, searchParam = "") {
 
 }
 //#endregion
+
+//#region SHOPPING_CART
+
+d.addEventListener("click", e => {
+
+  if (e.target.matches(".btn-shop--cart") || e.target.matches(".btn-shop--cart *")) {
+
+    let prod_id = e.target.dataset.id;
+
+    let product = {
+      "prod_id": prod_id,
+      "prod_quantity": 1
+    };
+
+    addToShoppingCart(product);
+    updateCartValue(d.querySelector(".cartSpan"));
+  }
+
+});
+
+
+
+
+//endregion
 
 
 

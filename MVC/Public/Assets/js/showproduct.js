@@ -1,43 +1,7 @@
+import { addToShoppingCart, updateCartValue } from "./addToShoppingCart.js";
+
 const d = document;
 const $unitsInput = d.getElementById("product_units");
-
-
-// ---- Loads MP Preference ----
-d.addEventListener("DOMContentLoaded", e => {
-
-  loadMercadoPagoBtn();
-});
-
-
-// ---- Product units btn ----
-d.addEventListener("click", e => {
-
-  // Product Units buttons
-  if (e.target.matches("#plus") || e.target.matches("#minus") || e.target.matches("#plus *") || e.target.matches("#minus *")) {
-
-    if (e.target.matches("#plus *") || e.target.matches("#plus")) {
-      if ($unitsInput.value == $unitsInput.max) return;
-      $unitsInput.value = parseInt($unitsInput.value) + 1
-    }
-    if (e.target.matches("#minus *") || e.target.matches("#minus")) {
-      if ($unitsInput.value == $unitsInput.min) return;
-      $unitsInput.value = parseInt($unitsInput.value) - 1;
-    }
-
-    // Loads a new buy btn
-    prod_quantity = $unitsInput.value;
-    loadMercadoPagoBtn();
-  }
-
-})
-
-d.addEventListener("change", e => {
-  if (e.target.matches("#product_units")) {
-    // Loads a new buy btn
-    prod_quantity = $unitsInput.value;
-    loadMercadoPagoBtn();
-  }
-})
 
 // Loads the preferences for the MP payment
 async function loadMercadoPagoBtn() {
@@ -95,3 +59,105 @@ async function loadMercadoPagoBtn() {
     });
   }
 }
+
+
+// ---- Loads MP Preference ----
+d.addEventListener("DOMContentLoaded", e => {
+
+  loadMercadoPagoBtn();
+});
+
+// ---- Product Units buttons ----
+d.addEventListener("change", e => {
+  if (e.target.matches("#product_units")) {
+    // Loads a new buy btn
+    prod_quantity = $unitsInput.value;
+    loadMercadoPagoBtn();
+  }
+})
+
+// ---- Product Units buttons / Loads Purchase ----
+d.addEventListener("click", e => {
+
+  // ------------------------------------- Product quantity BTNs -------------------------------------
+  if (e.target.matches("#plus") || e.target.matches("#minus") || e.target.matches("#plus *") || e.target.matches("#minus *")) {
+
+
+    if (e.target.matches("#plus *") || e.target.matches("#plus")) {
+      if ($unitsInput.value == $unitsInput.max) return;
+      $unitsInput.value = parseInt($unitsInput.value) + 1
+    }
+    if (e.target.matches("#minus *") || e.target.matches("#minus")) {
+      if ($unitsInput.value == $unitsInput.min) return;
+      $unitsInput.value = parseInt($unitsInput.value) - 1;
+    }
+
+    // Loads a new buy btn
+    prod_quantity = $unitsInput.value;
+    loadMercadoPagoBtn();
+  }
+  // ---------------------------------------------------------------------------------------------
+
+
+
+
+  // ------------------------------------- Loads a Purchase -------------------------------------
+  if (e.target.matches("#wallet_container") || e.target.matches("#wallet_container *")) {
+
+    loadSale(
+      {
+        "user_id": user_id,
+        "products": [
+          {
+            "prod_id": prod_id,
+            "prod_price": prod_price,
+            "prod_quantity": prod_quantity
+          }
+        ]
+      }
+    );
+
+  }
+
+  async function loadSale(producto) {
+
+    let res = await fetch(`${ROOT}/sales/loadSale`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(producto)
+    });
+  }
+
+  // ---------------------------------------------------------------------------------------------
+
+
+
+  // -------------------------- Adds a Product to the ShoppingCart -----------------------------
+  if (e.target.matches(".showproduct_btn_a") || e.target.matches(".showproduct_btn_a *")) {
+
+    e.preventDefault();
+
+    let $cartBtn = d.getElementById("cartBtn");
+    let $quantityBtn = d.getElementById("product_units");
+    let prod_id = $cartBtn.dataset.id;
+    let prod_quantity = Number($quantityBtn.value);
+
+    let product = {
+      "prod_id": prod_id,
+      "prod_quantity": prod_quantity
+    };
+
+    addToShoppingCart(product);
+    updateCartValue(d.querySelector(".cartSpan"));
+
+  }
+
+
+  // ---------------------------------------------------------------------------------------------
+
+})
+
+
+

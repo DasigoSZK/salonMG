@@ -15,7 +15,7 @@ class Sales extends Model{
   function getAllUserPurchases($user_id){
 
     try {
-      $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE fk_usuario=:userid");
+      $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE fk_usuario=:userid ORDER BY fecha DESC");
       $stmt->bindValue(":userid", $user_id);
       $stmt->execute();
 
@@ -27,6 +27,25 @@ class Sales extends Model{
       return "Error: ${$e->getMessage()}";
 
     }
+  }
+
+  function confirmPayment($payment_id){
+
+    try {
+
+      $query = "UPDATE {$this->table} SET confirmado=1 WHERE mp_payment_id=:paymentid";
+      $stmt = $this->db->prepare($query);
+      $stmt->bindValue(":paymentid", $payment_id);
+      $stmt->execute();
+
+      return $stmt->rowCount();
+
+    } catch (\Throwable $e) {
+
+      return "Error: ${$e->getMessage()}";
+
+    }
+
   }
 
 

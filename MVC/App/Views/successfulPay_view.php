@@ -1,7 +1,7 @@
 <!-- Contenido -->
 <main class="successfulPay">
 
-  <div class="successPay default_card mb-5 mx-2 py-3 px-4">
+  <div id='paydiv' data-paymentid='<?=$_GET['payment_id']?>' class="successPay default_card mb-5 mx-2 py-3 px-4">
     <h2 class='text-success text-center fs-1 mb-3'>Tu pago fue aprobado✅</h2>
     <p class='text-dark fs-5'>
       Puedes verificar tu compra en la sección "Mis Compras".
@@ -13,3 +13,4 @@
   </div>
 
 </main>
+<script src='<?=ROOT?>/Assets/js/successfulPay.js'></script>

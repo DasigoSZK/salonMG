@@ -165,6 +165,19 @@ abstract class Model {
     }
     
   }
+
+  public function lastInsertId(){
+
+    try {
+      
+      return $this->db->lastInsertId();
+
+    } catch (\Throwable $e) {
+      
+      return $e->getMessage();
+
+    }
+  }
 }
 
 
