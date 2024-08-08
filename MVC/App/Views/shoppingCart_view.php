@@ -17,4 +17,4 @@
       </section>
 
   </main>
-  <script src='<?=ROOT?>/Assets/js/shoppingCart.js'></script>
+  <script type='module' src='<?=ROOT?>/Assets/js/shoppingCart.js'></script>

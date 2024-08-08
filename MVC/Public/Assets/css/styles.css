@@ -1141,6 +1141,7 @@ footer {
   text-align: center;
   width: 33.3%;
   display: block;
+  cursor: pointer;
 }
 
 

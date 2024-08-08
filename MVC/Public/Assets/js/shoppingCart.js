@@ -1,8 +1,8 @@
+import { updateCartValue } from "./addToShoppingCart.js";
+
 // --------------------------------- Variables ---------------------------------
 const d = document;
 const ls = localStorage;
-// EmptyCart 
-
 // ShoppingCart
 const $cartContainer = d.querySelector(".cart_container");
 const $finalPrice = d.getElementById("finalPrice");
@@ -17,11 +17,52 @@ d.addEventListener("DOMContentLoaded", e => {
 
 d.addEventListener("click", e => {
 
+  // DELETE prod
   if (e.target.matches(".prod_trash")) {
 
     let prodID = e.target.dataset.id;
 
     deleteProdFromLS(prodID);
+    updateCartValue(d.querySelector(".cartSpan"));
+  }
+
+  // SUBTRACT quantity
+  if (e.target.matches("#minusbtn")) {
+
+    let $input = e.target.nextElementSibling;
+
+    let prodID = e.target.dataset.id;
+    let minValue = $input.min;
+
+    subtractProductUnits(prodID, minValue);
+    updateCartValue(d.querySelector(".cartSpan"));
+  }
+
+  // ADD quantity
+  if (e.target.matches("#plusbtn")) {
+
+    let $input = e.target.previousElementSibling;
+
+    let prodID = e.target.dataset.id;
+    let maxValue = $input.max;
+
+    addProductUnits(prodID, maxValue);
+    updateCartValue(d.querySelector(".cartSpan"));
+
+  }
+})
+
+d.addEventListener("change", e => {
+
+  if (e.target.matches("#quantity_input")) {
+
+    let prodID = e.target.dataset.id;
+    let newValue = e.target.value;
+    let minValue = e.target.min;
+    let maxValue = e.target.max;
+    let element = e.target;
+
+    changeProdQuantity(prodID, newValue, minValue, maxValue, element);
   }
 })
 
@@ -110,9 +151,9 @@ async function loadShoppingCart(products) {
         <div class='d-flex flex-column ms-2 align-self-start'>
           <h5 class='prod_title fs-5'>${prod.prod_name}</h5>
           <div class='prod_quantitybtn mt-2'>
-            <span id='minusbtn' class="quantity_minus text-primary fw-bold">-</span>
-            <input id="quantity_input" type="number" name="quantity" value='${prod.prod_quantity}' min='1' max='${prod.prod_stock}' step='1' >
-            <span id='plusbtn' class="quantity_plus text-primary fw-bold">+</span>
+            <span data-id='${prod.prod_id}' id='minusbtn' class="quantity_minus text-primary fw-bold">-</span>
+            <input data-id='${prod.prod_id}' id="quantity_input" type="number" name="quantity" value='${prod.prod_quantity}' min='1' max='${prod.prod_stock}' step='1' >
+            <span data-id='${prod.prod_id}' id='plusbtn' class="quantity_plus text-primary fw-bold">+</span>
           </div>
         </div>
       </div>
@@ -159,6 +200,78 @@ function deleteProdFromLS(prodID) {
     if (shoppingCart.productos[i].prod_id == prodID) {
       shoppingCart.productos.splice(i, 1);
       break;
+    }
+  }
+
+  ls.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+  loadLS();
+}
+
+function subtractProductUnits(prodID, minValue) {
+  let shoppingCart = JSON.parse(ls.getItem("shoppingCart"));
+
+  for (let i = 0; i < shoppingCart.productos.length; i++) {
+
+    if (shoppingCart.productos[i].prod_id == prodID) {
+
+      if (Number(shoppingCart.productos[i].prod_quantity) > minValue) {
+        shoppingCart.productos[i].prod_quantity = Number(shoppingCart.productos[i].prod_quantity) - 1;
+        break;
+      } else {
+        break
+      }
+    }
+  }
+
+  ls.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+  loadLS();
+}
+
+function addProductUnits(prodID, maxValue) {
+  let shoppingCart = JSON.parse(ls.getItem("shoppingCart"));
+
+  for (let i = 0; i < shoppingCart.productos.length; i++) {
+
+    if (shoppingCart.productos[i].prod_id == prodID) {
+
+      if (Number(shoppingCart.productos[i].prod_quantity) < maxValue) {
+        shoppingCart.productos[i].prod_quantity = Number(shoppingCart.productos[i].prod_quantity) + 1;
+        break;
+      } else {
+        break;
+      }
+    }
+  }
+
+  ls.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+  loadLS();
+
+}
+
+function changeProdQuantity(prodID, newValue, minValue, maxValue, element) {
+  let shoppingCart = JSON.parse(ls.getItem("shoppingCart"));
+
+  console.log("Nuevo valor: " + newValue);
+  console.log("min: " + minValue);
+  console.log("max: " + maxValue);
+
+  for (let i = 0; i < shoppingCart.productos.length; i++) {
+
+    if (shoppingCart.productos[i].prod_id == prodID) {
+
+      if (newValue >= minValue && newValue <= maxValue) {
+        shoppingCart.productos[i].prod_quantity = Number(newValue);
+        break;
+      } else if (newValue > maxValue) {
+        shoppingCart.productos[i].prod_quantity = Number(maxValue);
+        break;
+      } else if (newValue < minValue) {
+        shoppingCart.productos[i].prod_quantity = Number(minValue);
+        break;
+      }
     }
   }
 
