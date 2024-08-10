@@ -8,6 +8,9 @@ const $cartContainer = d.querySelector(".cart_container");
 const $finalPrice = d.getElementById("finalPrice");
 
 
+
+
+
 // --------------------------------- Listeners ---------------------------------
 d.addEventListener("DOMContentLoaded", e => {
 
@@ -48,6 +51,26 @@ d.addEventListener("click", e => {
 
     addProductUnits(prodID, maxValue);
     updateCartValue(d.querySelector(".cartSpan"));
+
+  }
+
+  // Loads a "Venta" in the DB
+  if (e.target.matches("#wallet_container") || e.target.matches("#wallet_container *")) {
+
+    let ventaProds = [];
+    MPProducts.forEach(prod => {
+
+      ventaProds.push({
+        "prod_id": prod.prod_id,
+        "prod_price": prod.prod_price,
+        "prod_quantity": prod.prod_quantity
+      });
+    })
+
+    loadSale({
+      "user_id": user_id,
+      "products": ventaProds
+    });
 
   }
 })
@@ -98,6 +121,12 @@ function loadLS() {
   } else {
 
     $emptyCartDiv.classList.remove("d-none");
+    const $lastMPBtn = d.getElementById("wallet_container");
+
+    // Removes the last MPBtn 
+    if ($lastMPBtn) {
+      $lastMPBtn.remove();
+    }
 
   }
 }
@@ -135,6 +164,12 @@ async function getShoppingCartProducts(lsProducts) {
 
 async function loadShoppingCart(products) {
 
+  if (window.MPProducts) {
+    window.MPProducts = products;
+  } else {
+    window.MPProducts = products;
+  }
+  // -------------------- Loads ShoppingCart VIEW --------------------
   let $fragment = d.createDocumentFragment();
   let finalPrice = 0;
 
@@ -189,6 +224,91 @@ async function loadShoppingCart(products) {
   $cartContainer.appendChild($fragment);
 
 
+
+
+
+  // -------------------- Loads MercadoPago Btn --------------------
+  let res = await fetch(`${ROOT}/product/loadShoppingCartMPBtn`, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(products)
+  });
+
+  let json = await res.json();
+
+  console.log(json)
+  if (json.success && json.result != null) {
+
+    const $lastMPBtn = d.getElementById("wallet_container");
+
+    // Removes the last Btn and creates a new one
+    if ($lastMPBtn) {
+      $lastMPBtn.remove();
+      let $mpBtn = d.createElement("div");
+      $mpBtn.id = "wallet_container";
+      $mpBtn.className = "mx-auto sc_mpbtn";
+      $cartContainer.insertAdjacentElement("afterend", $mpBtn);
+
+      // TOKEN AND CURRENCY
+      const mp = new MercadoPago(`${MP_PUBLIC_KEY}`, {
+        locale: 'es-AR'
+      });
+
+      // BTN CONFIG
+      mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+          // Prod IDs
+          preferenceId: json.result,
+          // Redirection type
+          redirectMode: "self"
+        },
+        // BTN Customization
+        customization: {
+          texts: {
+            // (pay=pagar, buy=comprar)
+            action: "buy",
+            // (security_safety="Pagar de forma segura")
+            valueProp: "security_safety"
+          }
+        }
+      });
+
+    } else {
+      // Creates a new MP btn
+      let $mpBtn = d.createElement("div");
+      $mpBtn.id = "wallet_container";
+      $mpBtn.className = "mx-auto sc_mpbtn";
+      $cartContainer.insertAdjacentElement("afterend", $mpBtn);
+
+      // TOKEN AND CURRENCY
+      const mp = new MercadoPago(`${MP_PUBLIC_KEY}`, {
+        locale: 'es-AR'
+      });
+
+      // BTN CONFIG
+      mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+          // Prod IDs
+          preferenceId: json.result,
+          // Redirection type
+          redirectMode: "self"
+        },
+        // BTN Customization
+        customization: {
+          texts: {
+            // (pay=pagar, buy=comprar)
+            action: "buy",
+            // (security_safety="Pagar de forma segura")
+            valueProp: "security_safety"
+          }
+        }
+      });
+    }
+
+
+  }
 }
 
 function deleteProdFromLS(prodID) {
@@ -278,4 +398,15 @@ function changeProdQuantity(prodID, newValue, minValue, maxValue, element) {
   ls.setItem("shoppingCart", JSON.stringify(shoppingCart));
 
   loadLS();
+}
+
+async function loadSale(products) {
+
+  let res = await fetch(`${ROOT}/sales/loadSale`, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(products)
+  });
 }

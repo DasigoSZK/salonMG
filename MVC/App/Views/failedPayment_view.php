@@ -13,3 +13,4 @@
   </div>
 
 </main>
+<script src='<?=ROOT?>/Assets/js/failedPayment.js'></script>

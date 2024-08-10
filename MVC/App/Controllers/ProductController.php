@@ -199,6 +199,89 @@ class ProductController extends Controller{
 
     
   }
+
+  public function loadShoppingCartMPBtn(){
+
+    session_start();
+
+    // Gets JSON data
+    $JSONdata = file_get_contents('php://input');
+    $products = json_decode($JSONdata, true);
+
+    // Response object
+    $res = new Result();
+
+    if(is_array($products) && !empty($products)){
+
+      // ----- MercadoPago preferences -----
+      MercadoPagoConfig::setAccessToken(MP_PRIVATE_KEY);
+      $client = new PreferenceClient();
+
+      // Redirections
+      $backUrls = [
+        "success" => "localhost".ROOT."/user/successfulPayment",
+        "failure" => "localhost".ROOT."/user/failedPayment",
+      ];
+
+      // Each product of the shoppingCart
+      $mp_items = [];
+
+      foreach($products as $prod){
+
+        $item = [
+          "id" => (string)$prod['prod_id'],
+          "title"=> (string)$prod['prod_name'],
+          "quantity"=> (int)$prod['prod_quantity'],
+          "unit_price"=> (int)str_replace(",",".", str_replace(".", "", $prod['prod_price'])),
+          // Detalles opcionales
+          "picture_url" => __DIR__."/Assets/images/".$prod['prod_photo'],
+          "currency_id" => "ARS"
+        ];
+
+        array_push($mp_items, $item);
+      };
+
+
+      // MP PREFERENCE
+      $preference = $client->create([
+        // Products
+        "items"=> $mp_items,
+        // Customer Data
+        "payer" => [
+          "name" => $_SESSION['user_name'],
+          "surname" => $_SESSION['user_lastname'],
+          "email" => $_SESSION['user_mail']
+        ],
+        // Redirection URLs
+        "back_urls" => $backUrls,
+        // Returns to the page automatically
+        "auto_return" => "approved",
+        // Only successful/failed payment (NOT PENDING)
+        "binary_mode" => true,
+        // Market name
+        "statent_descriptor"=>"Salon de Belleza M&G",
+        // Payment ID
+        "external_reference"=>"M&G_User-{$_SESSION['user_id']}"
+        // Webhook URL (payment notification)
+        //"notification_url" => "https://salondebelleza.com/public/sales/paymentWebhook"
+      ]);
+      
+
+      $res->success = true;
+      $res->result = $preference->id;
+      $res->message = "Preferences created";
+      
+    }else{
+
+      $res->success = false;
+      $res->result = null;
+      $res->message = "Empty array";
+
+    }
+
+
+    echo json_encode($res);
+  }
 }
 
 ?>

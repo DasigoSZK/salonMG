@@ -1095,8 +1095,6 @@ footer {
   max-width: 900px;
 }
 
-.cart_prod {}
-
 .prod_img {
   max-width: 100%;
   width: 72px;
@@ -1142,6 +1140,11 @@ footer {
   width: 33.3%;
   display: block;
   cursor: pointer;
+}
+
+.sc_mpbtn {
+  width: 100%;
+  max-width: 600px !important;
 }
 
 

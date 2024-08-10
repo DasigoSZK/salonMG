@@ -32,6 +32,21 @@ class SalesHasProducts extends Model{
     }
   }
 
+  function deleteAssociatedProducts($id_sale){
+    try {
+      $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE fk_venta=:id");
+      $stmt->bindParam(":id", $id_sale);
+      $stmt->execute();
+
+      //Devuelve la cantidad de filas afectadas
+      return $stmt->rowCount();
+
+    } catch (\Throwable $e) {
+      
+      return "Error: ${$e->getMessage()}";
+    }
+  }
+
 
 
 }

@@ -171,7 +171,25 @@ class SalesController extends Controller{
 
     unset($_SESSION['lastpurchase_id']);
 
-    return json_encode($bdres);
+    echo json_encode($bdres);
+  }
+
+  public function deleteLastPurchase(){
+
+    session_start();
+
+    // Gets JSON data
+    $venta_id = $_SESSION['lastpurchase_id'];
+
+    // Deletes each "venta_has_product" associated to "venta"
+    $this->salesHasProductsModel->deleteAssociatedProducts($venta_id);
+
+    // Deletes "venta"
+    $bdres = $this->salesModel->deleteById($venta_id);
+
+    unset($_SESSION['lastpurchase_id']);
+
+    echo json_encode($bdres);
   }
 
 

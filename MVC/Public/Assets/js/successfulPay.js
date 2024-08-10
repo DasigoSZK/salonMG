@@ -2,6 +2,9 @@ const d = document;
 
 d.addEventListener("DOMContentLoaded", e => {
 
+  if (localStorage.getItem("shoppingCart")) {
+    localStorage.removeItem("shoppingCart");
+  }
   let payment_id = d.querySelector("#paydiv").dataset.paymentid;
   loadPaymentId(payment_id);
 });

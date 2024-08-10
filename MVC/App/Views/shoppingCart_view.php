@@ -17,4 +17,9 @@
       </section>
 
   </main>
+  <script>
+    var user_id = <?=$_SESSION['user_id']?>;
+    var MP_PUBLIC_KEY = "<?=MP_PUBLIC_KEY?>";
+  </script>
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
   <script type='module' src='<?=ROOT?>/Assets/js/shoppingCart.js'></script>
